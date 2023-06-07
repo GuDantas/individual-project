@@ -1,0 +1,46 @@
+.newComment{
+    display: table;
+    background-color: lightgray;
+    margin: auto;
+    padding-bottom: 5vh ;
+}
+
+.newComment input{
+    border-style:none;
+    border-radius: 3px ;
+}
+
+.guideText{
+color: black;
+}
+
+.comentarioInpt{
+    width: 80%;
+    height: 15ch;
+}
+
+
+.basicInfo{
+    display: flex;
+}
+.about{
+    margin: 0;
+    padding: 0;
+    color: black;
+    margin-right: 5vw
+}
+.comunityContainer{
+    background-color: lightgray;
+    margin-top: 10vh !important;
+    margin:auto;
+    display: table;
+}
+.commentOptions{
+    display: flex;
+}
+.publish{
+    margin-top: 2vh;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: darkgray;
+}

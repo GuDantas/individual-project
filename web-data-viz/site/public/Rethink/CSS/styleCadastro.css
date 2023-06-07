@@ -1,0 +1,36 @@
+.main, body{
+    margin: 0;
+    padding: 0;
+    background-image: url(../images/backgroundCadastro.jpg);
+    background-position: top;
+}
+.inptBox{
+    background-color: rgb(82, 79, 79, .7);
+    margin: auto;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    padding-bottom: 7vh;
+    border-radius: 10px;
+    border: 1px solid;
+}
+.inptBox h2{
+margin-bottom: 0;
+}
+.inptBox p, h2{
+color: white;
+margin-left: 1vw;
+}
+.inptBox input{
+    margin-left: 1vw;
+    border-radius: 5px;
+    border-style: none;
+    height: 2ch;
+}
+.btnCadastro{
+    height: 5vh;
+    margin-top: 3vh;
+    margin-left: 1vw;
+    border-radius: 5px;
+    border-style: none;
+    background-color: lightgray;
+}

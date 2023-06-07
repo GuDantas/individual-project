@@ -1,0 +1,23 @@
+.main, body{
+    margin: 0 ;
+    padding: 0;
+}
+.content{
+    display: flex;
+    background-color: lightgray;
+    margin-top: 5vh;
+    padding-top:5vh ;
+    padding-bottom:5vh ;
+    margin-bottom: 5vh;
+    justify-content: space-around;
+    border-radius: 15px;
+    border: solid #737171 2px;
+}
+.content h3, h2{
+    color: black;
+}
+.contentBar{
+    background-color: darkgray;
+    border-radius: 10px;
+    border: solid #737171 2px;
+}

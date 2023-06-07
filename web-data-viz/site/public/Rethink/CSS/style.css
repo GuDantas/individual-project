@@ -1,0 +1,94 @@
+.main, body{
+    margin: 0 !important;
+    padding: 0 !important;
+    background-image: url(../images/backgroundImage.jpg);
+}
+.Header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #737171;
+}
+.interaction{
+    height: 8vw;
+    display: flex;
+}
+.interaction h1{
+    color: lightgray;
+    margin-left: 1vw;
+}
+.logoLink{
+    text-decoration: none;
+}
+.menu{
+    padding-top: 5vh;
+}
+.option{
+    text-decoration: none;
+    color: black;
+    background-color:#968A87;
+    padding:3px !important;
+    border-radius: 6px !important;
+    border-style: solid !important;
+    border-color: darkred !important;
+    border-width: 1px;
+    margin-left: 2vw;
+    margin-right:2vw ;
+}
+h2, h3{
+    color: lightgray;
+}
+.plainText{
+    margin-left: 30vw;
+}
+.carShow{
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+
+}
+.column{
+    display: flex;
+    margin:auto;
+}
+.single{
+    margin-left:40% !important;
+}
+.content{
+    margin-left:7vw ;
+}
+.content img{
+    height: 25vh;
+}
+.footer{
+    display: flex;
+    height: 15vh;
+    background-color: #737171;
+}
+.footerColumn{
+    display: flex;
+    flex-direction: column;
+    border-left: solid 1px black;
+}
+.footerColumn a{
+    color: black;
+    text-decoration: none;
+    margin-top: 2vh;
+}
+.footer h4{
+    margin-top: 1vh;
+    margin-bottom: 0;
+}
+.copyright{
+    margin: auto;
+    color: white;
+    background-color: black;
+    width: 100%;
+    text-align: center;
+}
+.homeBtn{
+    height: 15vh;
+}
+.logoHome{
+    display: flex;
+}

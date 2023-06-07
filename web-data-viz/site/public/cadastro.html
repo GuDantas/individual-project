@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se</title>
+    <link rel="stylesheet" href="Rethink/flexboxgrid-6.3.1/css/flexboxgrid.min.css">
+    <link rel="stylesheet" href="Rethink/CSS/style.css">
+    <link rel="stylesheet" href="Rethink/CSS/styleCadastro.css">
+    <link rel="stylesheet" href="Rethink/../css/style.css">
+</head>
+
+<body>
+    <div class=" main container-fluid">
+        <div class="row justify-content-sm-center">
+            <div class="Header col-md-12">
+                <div class="interaction col-md-4">
+                    <a class="logoLink" href="index.html">
+                        <h1>Rethink the Engines</h1>
+                    </a>
+                    <img class="logotipo" src="Rethink/images/logo.png" alt="logotipo">
+                </div>
+                <div class="menu col-md-8">
+                    <a class="option" href="HTML/realidade.html">Realidade sobre motores a combustão & elétricos</a>
+                    <a class="option" href="">Compare você mesmo</a>
+                    <a class="option" href="">Comunidade</a>
+                </div>
+            </div>
+            <!--Fim header-->
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+            </div>
+            <div class="inptBox col-md-4">
+                <h2>Entre na comunidade mais rápida do Brasil</h2>
+                <p class="inptText">Nome</p>
+                <input placeholder="Nome" id="inptNome">
+                <p class="inptText">Email</p>
+                <input type="email" placeholder="email" id="inptEmail">
+                <p class="inptText">senha</p>
+                <input type="password" placeholder="******" id="inptSenha"><br>
+                <button class="btnCadastro" onclick="cadastrar()">Cadastrar-se</button>
+            </div>
+
+            <!--Início Footer-->
+            <div class="footer col-md-12 col-lg-12">
+                <div class="logoHome col-md-2">
+                    <a href="index.html">
+                        <img class="homeBtn" src="Rethink/images/logo.png" alt="Logotipo / Botão home">
+                    </a>
+                    <h3>Rethink The Engines</h3>
+                </div>
+                <div class="footerColumn col-md-2">
+                    <h4>Contatos:</h4>
+                    <a href="">Sobre nós</a>
+                    <a href="">Sugestões</a>
+                </div>
+                <div class="footerColumn col-md-2">
+                    <h4>Nosso Contexto:</h4>
+                    <a href="">Compare Você mesmo</a>
+                    <a href="">Nossa Causa</a>
+                </div>
+                <div class="footerColumn col-md-2">
+                    <h4>Atalhos:</h4>
+                    <a href="">Página Inicial</a>
+                    <a href="">Comunidade</a>
+                </div>
+                <div class="footerColumn col-md-2">
+                    <h4>Autenticação:</h4>
+                    <a href="">Login</a>
+                    <a href="">Cadastro</a>
+                </div>
+            </div>
+            <b class="copyright">Copyright © 2023 - Todos os direitos reservados para Gustavo Enrico</b>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function cadastrar() {
+        var nomeVar = inptNome.value;
+        var emailVar = inptEmail.value;
+        var senhaVar = inptSenha.value;
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            return false;
+        }
+        else {
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000")
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+
+        }
+    }
+
+
+
+</script>
