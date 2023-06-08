@@ -3,11 +3,12 @@
     background-color: lightgray;
     margin: auto;
     padding-bottom: 5vh ;
+    margin-top: 7vh;
 }
 
 .newComment input{
     border-style:none;
-    border-radius: 3px ;
+    border-radius: 3px;
 }
 
 .guideText{
@@ -19,9 +20,13 @@ color: black;
     height: 15ch;
 }
 
-
+.comment{
+    border-top: 1px solid black;
+}
 .basicInfo{
     display: flex;
+    flex-direction: column;
+    margin-left: 2vw;
 }
 .about{
     margin: 0;
@@ -29,18 +34,34 @@ color: black;
     color: black;
     margin-right: 5vw
 }
+.descricao{
+    margin-left: 2vw;
+}
+.user{
+    margin-top: 1vh
+}
 .comunityContainer{
     background-color: lightgray;
     margin-top: 10vh !important;
     margin:auto;
     display: table;
+    padding: 0;
 }
 .commentOptions{
     display: flex;
 }
 .publish{
     margin-top: 2vh;
+    margin-bottom: 1vh;
     padding: 5px;
     border-radius: 3px;
     background-color: darkgray;
+}
+.hiddenMsg{
+    color: black;
+    display: none;
+    margin-top: 1vh;
+}
+.footer{
+    margin-top: 5vh;
 }

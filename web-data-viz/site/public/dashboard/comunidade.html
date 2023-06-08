@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../Rethink/CSS/comunidade.css">
 </head>
 
-<body>
+<body onload="atualizar(), verificarLogin()">
     <div class=" main container-fluid">
         <div class="row justify-content-sm-center">
             <div class="Header col-md-12">
@@ -34,18 +34,19 @@
                 <input class="assuntoInpt" id="inptAssunto" type="text">
                 <h2 class="guideText">Comentário</h2>
                 <input class="comentarioInpt" id="inptComentario"><br>
-                <button class="publish option" onclick="publicar()">Publicar</button>
+                <button id="btnPublicar" class="publish option" onclick="publicar()">Publicar</button>
+                <a id="hiddenMsg" class="hiddenMsg" href="../login.html">É necessário fazer login para publicar</a>
             </div>
             <div class="comunityContainer col-md-8" id="comunityContainer">
-                <div class="comment">
-                    <div class="basicInfo">
-                        <h3 class="about">Assunto</h3>
-                        <b class="user">Usuario</b>
+                <div id="comment" class="comment">
+                    <div id="basicInfo" class="basicInfo">
+                        <h3 id="about" class="about">Assunto</h3>
+                        <b id="user" class="user">Usuario</b>
                     </div>
-                    <p class="descricao">Emerson Olhos quebrou o recorde de velocidade em um uno?</p>
-                    <div class="commentOptions">
-                        <button class="option publish">Excluir</button>
-                        <button class="option publish">Responder</button>
+                    <p id="descricao" class="descricao">Emerson Olhos quebrou o recorde de velocidade em um uno?</p>
+                    <div id="commentOptions" class="commentOptions">
+                        <button id="excluir" class="option publish">Excluir</button>
+                        <button id="responder" class="option publish">Responder</button>
                     </div>
                 </div>
             </div>
@@ -87,10 +88,11 @@
 
 </html>
 <script>
+    var idUsuario = sessionStorage.ID_USUARIO;
     function publicar() {
         var assuntoVar = inptAssunto.value;
         var descricaoVar = inptComentario.value;
-        var idUsuario = sessionStorage.ID_USUARIO;
+
         fetch(`/avisos/publicar/${idUsuario}`, {
             method: "post",
             headers: {
@@ -108,4 +110,78 @@
         });
         return false;
     }
+    function atualizar() {
+        fetch("/avisos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                
+                }
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var divContainer = document.getElementById("comunityContainer")
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        var divComment = document.createElement("div");
+                        var divBasicInfo = document.createElement("div");
+                        var pDescricao = document.createElement("p");
+                        var h3About = document.createElement("h3");
+                        var bUsuario = document.createElement("b");
+                        var divCommentOptions = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnExcluir = document.createElement("button");
+                        
+                        bUsuario.innerHTML = `Usuario: ${publicacao.nomeUsuario}`;
+                        h3About.innerHTML = `Assunto: ${publicacao.assunto}`;
+                        pDescricao.innerHTML = `${publicacao.descricao}`;
+                        btnEditar.innerHTML =`Editar`;
+                        btnExcluir.innerHTML =`Excluir`;
+
+                        divComment.className = "comment";
+                        bUsuario.className = "user";
+                        h3About.className = "about";
+                        pDescricao.className = "descricao";
+                        divBasicInfo.className = "basicInfo";
+                        divCommentOptions.className = "commentOptions";
+                        btnEditar.className = "option publish";
+                        btnExcluir.className = "option publish";
+
+                        btnExcluir.setAttribute("onclick", `excluir(${publicacao.nomeUsuario})`);
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.nomeUsuario})`);
+
+                        divComment.appendChild(divBasicInfo);
+                        divComment.appendChild(pDescricao);
+                        divComment.appendChild(divCommentOptions);
+                        divBasicInfo.appendChild(bUsuario);
+                        divBasicInfo.appendChild(h3About);
+                        divCommentOptions.appendChild(btnEditar);
+                        divCommentOptions.appendChild(btnExcluir);
+
+                        divContainer.appendChild(divComment)
+                        
+                    }
+                
+                });
+            } else {
+                throw("Houve um erro")
+            }
+        }).catch(function (resposta){
+            console.error(resposta);
+        });
+    }
+
+function verificarLogin(){
+    if(idUsuario == null){
+        btnPublicar.style.display = "none"
+        hiddenMsg.style.display = "block"
+    }
+    else{
+        btnPublicar.style.display = "block"
+        hiddenMsg.style.display = "none"
+    }
+}
 </script>
