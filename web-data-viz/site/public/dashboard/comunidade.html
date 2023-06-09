@@ -38,17 +38,6 @@
                 <a id="hiddenMsg" class="hiddenMsg" href="../login.html">É necessário fazer login para publicar</a>
             </div>
             <div class="comunityContainer col-md-8" id="comunityContainer">
-                <div id="comment" class="comment">
-                    <div id="basicInfo" class="basicInfo">
-                        <h3 id="about" class="about">Assunto</h3>
-                        <b id="user" class="user">Usuario</b>
-                    </div>
-                    <p id="descricao" class="descricao">Emerson Olhos quebrou o recorde de velocidade em um uno?</p>
-                    <div id="commentOptions" class="commentOptions">
-                        <button id="excluir" class="option publish">Excluir</button>
-                        <button id="responder" class="option publish">Responder</button>
-                    </div>
-                </div>
             </div>
             <!--Inicio Footer-->
             <div class="footer col-md-12 col-lg-12">
@@ -124,6 +113,7 @@
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
                     var divContainer = document.getElementById("comunityContainer")
+                    divContainer.innerHTML=""
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
                         var divComment = document.createElement("div");
@@ -136,6 +126,7 @@
                         var btnExcluir = document.createElement("button");
                         
                         bUsuario.innerHTML = `Usuario: ${publicacao.nomeUsuario}`;
+
                         h3About.innerHTML = `Assunto: ${publicacao.assunto}`;
                         pDescricao.innerHTML = `${publicacao.descricao}`;
                         btnEditar.innerHTML =`Editar`;
@@ -150,7 +141,7 @@
                         btnEditar.className = "option publish";
                         btnExcluir.className = "option publish";
 
-                        btnExcluir.setAttribute("onclick", `excluir(${publicacao.nomeUsuario})`);
+                        btnExcluir.setAttribute("onclick", `deletar(${publicacao.idComentario})`);
                         btnEditar.setAttribute("onclick", `editar(${publicacao.nomeUsuario})`);
 
                         divComment.appendChild(divBasicInfo);
@@ -184,4 +175,20 @@ function verificarLogin(){
         hiddenMsg.style.display = "none"
     }
 }
+
+function deletar(idAviso) {
+        console.log("Criar função de apagar post escolhido - ID" + idAviso);
+        fetch(`/avisos/deletar/${idAviso}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+            atualizar()
+
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
 </script>
