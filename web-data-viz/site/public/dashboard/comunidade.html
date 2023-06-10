@@ -12,6 +12,15 @@
 </head>
 
 <body onload="atualizar(), verificarLogin()">
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Modal Title</h2>
+            <p>This is the modal content.</p>
+        </div>
+    </div>
+
     <div class=" main container-fluid">
         <div class="row justify-content-sm-center">
             <div class="Header col-md-12">
@@ -38,6 +47,18 @@
                 <a id="hiddenMsg" class="hiddenMsg" href="../login.html">É necessário fazer login para publicar</a>
             </div>
             <div class="comunityContainer col-md-8" id="comunityContainer">
+                <!--Conteúdo adicionado aqui-->
+
+                <!-- Requisito importante adiado -->
+                <!-- Modal para função de edição será implantado futuramente -->
+                <!-- <button id="openModalBtn">Open Modal</button>
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Modal Title</h2>
+                        <p>This is the modal content.</p>
+                    </div>
+                </div> -->
             </div>
             <!--Inicio Footer-->
             <div class="footer col-md-12 col-lg-12">
@@ -69,6 +90,7 @@
                     <a href="../login.html">Login</a>
                     <a href="../cadastro.html">Cadastro</a>
                 </div>
+
             </div>
             <b class="copyright">Copyright © 2023 - Todos os direitos reservados para Gustavo Enrico</b>
         </div>
@@ -78,6 +100,41 @@
 </html>
 <script>
     var idUsuario = sessionStorage.ID_USUARIO;
+
+    // function editarComentario(assunto, descricao, idComentario) {
+    // }
+
+    // function openModal(assunto, descricao, idComentario) {
+            
+            
+    //         var modalContent = document.createElement("div")
+    //         var buttonEditar = document.createElement("button");
+    //         var inputAssunto = document.createElement("input");
+    //         var inputDescricao = document.createElement("input")
+
+    //         modalContent.innerHTML += '<span class="close" onclick="closeModal()">&times;</span>'
+    //         buttonEditar.innerHTML += 'editar'
+
+    //         modalContent.setAttribute("class", "modal-content")
+    //         buttonEditar.setAttribute("onclick", `editarComentario('${assunto}', '${descricao}', ${idComentario})`)
+
+    //         inputAssunto.value = assunto;
+    //         inputDescricao.value = descricao;
+            
+    //         modalContent.innerHTML += `<input class='about' id='assuntoModal'>`;
+    //         modalContent.innerHTML += `<input class='descricao' id='descricaoModal>'`;
+    //         modalContent.innerHTML += `<button>Editar</butto>`;
+    //         modalContent.appendChild(inputAssunto)
+    //         modalContent.appendChild(inputDescricao)
+    //         modalContent.appendChild(buttonEditar)
+
+    //         modal.style.display = "block";
+    // }
+
+    // function closeModal() {
+    //     modal.style.display = "none";
+    // }
+
     function publicar() {
         var assuntoVar = inptAssunto.value;
         var descricaoVar = inptComentario.value;
@@ -108,12 +165,12 @@
                     mensagem.innerHTML = "Nenhum resultado encontrado."
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
-                
+
                 }
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
                     var divContainer = document.getElementById("comunityContainer")
-                    divContainer.innerHTML=""
+                    divContainer.innerHTML = ""
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
                         var divComment = document.createElement("div");
@@ -122,15 +179,17 @@
                         var h3About = document.createElement("h3");
                         var bUsuario = document.createElement("b");
                         var divCommentOptions = document.createElement("div");
-                        var btnEditar = document.createElement("button");
+                        // var btnEditar = document.createElement("button");
                         var btnExcluir = document.createElement("button");
-                        
+                        var btnEnviar = document.createElement("button");
+
                         bUsuario.innerHTML = `Usuario: ${publicacao.nomeUsuario}`;
 
                         h3About.innerHTML = `Assunto: ${publicacao.assunto}`;
                         pDescricao.innerHTML = `${publicacao.descricao}`;
-                        btnEditar.innerHTML =`Editar`;
-                        btnExcluir.innerHTML =`Excluir`;
+                        // btnEditar.innerHTML = `Editar`;
+                        btnExcluir.innerHTML = `Excluir`;
+                        btnEnviar.innerHTML = `Enviar`;
 
                         divComment.className = "comment";
                         bUsuario.className = "user";
@@ -138,45 +197,48 @@
                         pDescricao.className = "descricao";
                         divBasicInfo.className = "basicInfo";
                         divCommentOptions.className = "commentOptions";
-                        btnEditar.className = "option publish";
+                        // btnEditar.className = "option publish";
                         btnExcluir.className = "option publish";
+                        btnEnviar.className = "option publish";
 
-                        btnExcluir.setAttribute("onclick", `deletar(${publicacao.idComentario})`);
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.nomeUsuario})`);
+                        btnExcluir.setAttribute("onclick", `deletar(${publicacao.idComentario}'`);
+                        // btnEditar.setAttribute("onclick", `openModal('${publicacao.assunto}', '${publicacao.descricao}', ${publicacao.idComentario})`);
+                        btnEnviar.setAttribute("onclick", `editar(${publicacao.idComentario})`);
 
                         divComment.appendChild(divBasicInfo);
                         divComment.appendChild(pDescricao);
                         divComment.appendChild(divCommentOptions);
                         divBasicInfo.appendChild(bUsuario);
                         divBasicInfo.appendChild(h3About);
-                        divCommentOptions.appendChild(btnEditar);
+                        // divCommentOptions.appendChild(btnEditar);
                         divCommentOptions.appendChild(btnExcluir);
+                        divCommentOptions.appendChild(btnEnviar);
 
                         divContainer.appendChild(divComment)
-                        
+
                     }
-                
+
                 });
             } else {
-                throw("Houve um erro")
+                throw ("Houve um erro")
             }
-        }).catch(function (resposta){
+        }).catch(function (resposta) {
             console.error(resposta);
         });
     }
 
-function verificarLogin(){
-    if(idUsuario == null){
-        btnPublicar.style.display = "none"
-        hiddenMsg.style.display = "block"
+    function verificarLogin() {
+        if (idUsuario == null) {
+            btnPublicar.style.display = "none"
+            hiddenMsg.style.display = "block"
+        }
+        else {
+            btnPublicar.style.display = "block"
+            hiddenMsg.style.display = "none"
+        }
     }
-    else{
-        btnPublicar.style.display = "block"
-        hiddenMsg.style.display = "none"
-    }
-}
 
-function deletar(idAviso) {
+    function deletar(idAviso) {
         console.log("Criar função de apagar post escolhido - ID" + idAviso);
         fetch(`/avisos/deletar/${idAviso}`, {
             method: "DELETE",

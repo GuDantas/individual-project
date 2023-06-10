@@ -93,25 +93,36 @@ function publicar(req, res) {
     }
 }
 
-function editar(req, res) {
-    var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
+// function editarComentario(req, res) {
+//     const sobre = req.body.sobre;
+//     const descricao = req.body.descricao;
+//     const idComentario = req.params.idComentario;
 
-    avisoModel.editar(novaDescricao, idAviso)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
-
-}
+//     if (sobre == undefined) {
+//         res.status(400).send("O sobre está indefinido!");
+//     } 
+//     else if (descricao == undefined) {
+//         res.status(400).send("O descricao está indefinido!");
+//     }
+//     else if (idComentario == undefined) {
+//         res.status(400).send("O idComentario está indefinido!");
+//     }
+//     else {
+//         avisoModel.editarComentario(sobre, descricao, idComentario)
+//             .then(
+//                 function (resultado) {
+//                     res.json(resultado);
+//                 }
+//             )
+//             .catch(
+//                 function (erro) {
+//                     console.log(erro);
+//                     console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+//                     res.status(500).json(erro.sqlMessage);
+//                 }
+//             );
+//     } 
+// }
 
 function deletarComentario(req, res) {
     var idComentario = req.params.idComentario;
@@ -136,12 +147,13 @@ function deletarComentario(req, res) {
     }
 }
 
+
 module.exports = {
     testar,
     listar,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
-    editar,
+    editarComentario,
     deletarComentario
 }
