@@ -38,6 +38,8 @@
                 <h2>Entre na comunidade mais rápida do Brasil</h2>
                 <p class="inptText">Nome</p>
                 <input placeholder="Nome" id="inptNome">
+                <p class="inptText">Nickname</p>
+                <input type="text" placeholder="Nickname" id="inptNickname">
                 <p class="inptText">Email</p>
                 <input type="email" placeholder="email" id="inptEmail">
                 <p class="inptText">senha</p>
@@ -86,6 +88,7 @@
         var nomeVar = inptNome.value;
         var emailVar = inptEmail.value;
         var senhaVar = inptSenha.value;
+        var nicknameVar = inptNickname.value;
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
@@ -103,7 +106,8 @@
                 body: JSON.stringify({
                     nomeServer: nomeVar,
                     emailServer: emailVar,
-                    senhaServer: senhaVar
+                    senhaServer: senhaVar,
+                    nicknameServer: nicknameVar
                 })
             }).then(function (resposta) {
 

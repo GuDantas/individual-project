@@ -1,17 +1,17 @@
 
-> CREATE DATABASE RETHINK;
+ CREATE DATABASE RETHINK;
 Query OK, 1 row affected (0,02 sec)
 
-> USE RETHINK;
+ USE RETHINK;
 Database changed
-> CREATE TABLE usuario(
-    -> idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    -> nomeUsuario VARCHAR(45) NOT NULL,
-    -> emailUsuario VARCHAR(65) NOT NULL,
-    -> senhaUsuario CHAR(20) NOT NULL)AUTO_INCREMENT = 100;
+CREATE TABLE usuario(
+     idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+     nomeUsuario VARCHAR(45) NOT NULL,
+     emailUsuario VARCHAR(65) NOT NULL,
+     senhaUsuario CHAR(20) NOT NULL)AUTO_INCREMENT = 100;
 
-> CREATE TABLE comentario(
-    -> idComentario INT PRIMARY KEY AUTO_INCREMENT,
-    -> assunto VARCHAR(45) NOT NULL,
-    -> descricao VARCHAR(500) NOT NULL,
-    -> fkUsuario INT, FOREIGN KEY(fkUsuario) REFERENCES usuario(idUsuario))AUTO_INCREMENT = 4000;
+ CREATE TABLE comentario(
+     idComentario INT PRIMARY KEY AUTO_INCREMENT,
+     assunto VARCHAR(45) NOT NULL,
+     descricao VARCHAR(500) NOT NULL,
+     fkUsuario INT, FOREIGN KEY(fkUsuario) REFERENCES usuario(idUsuario))AUTO_INCREMENT = 4000;

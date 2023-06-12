@@ -1,0 +1,22 @@
+.profileDiv{
+    background-color: darkgray;
+    margin: auto;
+    height: 48vh;
+    width: 50vh;
+    padding-top: 2vh;
+}
+.profileDiv, h2, h3{
+    color: black;
+}
+.Header{
+    margin-bottom: 10vh;
+}
+.footer{
+    margin-top: 10vh;
+}
+.profileInfo{
+    margin-left: 1vw;
+}
+.option{
+    margin-left: 1vw;
+}

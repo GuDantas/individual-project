@@ -5,14 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Perfil</title>
     <link rel="stylesheet" href="Rethink/flexboxgrid-6.3.1/css/flexboxgrid.min.css">
     <link rel="stylesheet" href="Rethink/CSS/style.css">
-    <link rel="stylesheet" href="Rethink/CSS/styleCadastro.css">
-    <link rel="stylesheet" href="Rethink/../css/style.css">
+    <link rel="stylesheet" href="Rethink/CSS/styleProfile.css">
 </head>
 
-<body>
+<body onload="getInfo()">
     <div class=" main container-fluid">
         <div class="row justify-content-sm-center">
             <div class="Header col-md-12">
@@ -29,21 +28,12 @@
                 </div>
             </div>
             <!--Final Header-->
-
-            <div class="alerta_erro">
-                <div class="card_erro" id="cardErro">
-                    <span id="mensagem_erro"></span>
-                </div>
+            <div class="profileDiv">
+                <h2 class="profileInfo" id="profileName">Nome:</h2>
+                <h3 class="profileInfo" id="profileNickname">Apelido:</h3>
+                <span class="profileInfo" id="profileEmail">Email:</span><br><br>
+                <button class="option">Adicionar Carro</button>
             </div>
-            <div class="inptBox col-md-4">
-                <h2>Login</h2>
-                <p class="inptText">Email</p>
-                <input type="email" placeholder="email" id="inptEmail">
-                <p class="inptText">senha</p>
-                <input type="password" placeholder="******" id="inptSenha"><br>
-                <button class="btnCadastro" onclick="logon()">Log-On</button>
-            </div>
-
             <!--Início Footer-->
             <div class="footer col-md-12 col-lg-12">
                 <div class="logoHome col-md-2">
@@ -80,49 +70,24 @@
 
 </html>
 <script>
-    function logon() {
-        var emailVar = inptEmail.value;
-        var senhaVar = inptSenha.value;
-
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            setInterval(() => {
-                cardErro.style.display = "none"
-            }, 5000)
-        }
-        else {
-            fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailServer: emailVar,
-                    senhaServer: senhaVar
+    function getInfo() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        fetch(`/usuarios/profile/${idUsuario}`, {
+            method: "GET",
+            headers: { "Content-type": "application/json" },
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    publicacao = resposta[0]
+                    profileName.innerHTML += `${publicacao.nomeUsuario}`;
+                    profileNickname.innerHTML += `${publicacao.nickname}`;
+                    profileEmail.innerHTML += `${publicacao.emailUsuario}`;
                 })
-            }).then(function (resposta) {
-                if (resposta.ok) {
-                    console.log(resposta);
+            }
+            
 
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-
-                        sessionStorage.EMAIL_USUARIO = json.emailUsuario;
-                        sessionStorage.NOME_USUARIO = json.nomeUsuario;
-                        sessionStorage.ID_USUARIO = json.idUsuario;
-
-                    });
-                    window.location = "index.html"
-                }
-
-            }).catch(function (erro) {
-                console.log(erro);
-            })
-
-        }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        })
     }
-
-
 </script>

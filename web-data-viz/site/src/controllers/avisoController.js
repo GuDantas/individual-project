@@ -154,6 +154,5 @@ module.exports = {
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
-    editarComentario,
     deletarComentario
 }
