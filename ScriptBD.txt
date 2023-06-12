@@ -8,6 +8,7 @@ CREATE TABLE usuario(
      idUsuario INT PRIMARY KEY AUTO_INCREMENT,
      nomeUsuario VARCHAR(45) NOT NULL,
      emailUsuario VARCHAR(65) NOT NULL,
+     Nickname VARCHAR(45),
      senhaUsuario CHAR(20) NOT NULL)AUTO_INCREMENT = 100;
 
  CREATE TABLE comentario(
@@ -15,3 +16,9 @@ CREATE TABLE usuario(
      assunto VARCHAR(45) NOT NULL,
      descricao VARCHAR(500) NOT NULL,
      fkUsuario INT, FOREIGN KEY(fkUsuario) REFERENCES usuario(idUsuario))AUTO_INCREMENT = 4000;
+
+INSERT INTO usuario VALUES(100,	'Gustavo', 'gustavo@gmail.com','GabiGol','12345678'),
+(101, 'Ribamar','ribamar@gmail.com','Ribamar','12345678');
+
+INSERT INTO comentario VALUES(4000,'Carros Lentos','UP TSI e golf GTI',100),
+(4001,'Carros bomba', 'Todos os mareas, todos os carros com motor 1.0 e 1.6 16 válvulas da Peugeout antes de 2016',101);

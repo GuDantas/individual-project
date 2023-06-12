@@ -4,6 +4,7 @@
     margin: auto;
     padding-bottom: 5vh ;
     margin-top: 7vh;
+    border-radius: 5px;
 }
 
 .newComment input{
@@ -45,6 +46,7 @@ color: black;
     margin-top: 10vh !important;
     margin:auto;
     display: table;
+    border-radius:5px ;
     padding: 0;
 }
 .commentOptions{

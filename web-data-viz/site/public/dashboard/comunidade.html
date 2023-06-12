@@ -8,7 +8,7 @@
     <title>Comunidade</title>
     <link rel="stylesheet" href="../Rethink/CSS/style.css">
     <link rel="stylesheet" href="../Rethink/flexboxgrid-6.3.1/css/flexboxgrid.min.css">
-    <link rel="stylesheet" href="../Rethink/CSS/comunidade.css">
+    <link rel="stylesheet" href="../css/comunidade.css">
 </head>
 
 <body onload="atualizar(), verificarLogin()">
@@ -34,6 +34,8 @@
                     <a class="option" href="../HTML/realidade.html">Realidade sobre motores a combustão & elétricos</a>
                     <a class="option" href="comparacao.html">Compare você mesmo</a>
                     <a class="option" href="comunidade.html">Comunidade</a>
+                    <a class="option" href="../perfil.html">Perfil</a>
+
                 </div>
             </div>
             <!--Final Header-->
@@ -83,7 +85,7 @@
                 <div class="footerColumn col-md-2">
                     <h4>Atalhos:</h4>
                     <a href="../index.html">Página Inicial</a>
-                    <a href="">Comunidade</a>
+                    <a href="comunidade.html">Comunidade</a>
                 </div>
                 <div class="footerColumn col-md-2">
                     <h4>Autenticação:</h4>
@@ -201,7 +203,7 @@
                         btnExcluir.className = "option publish";
                         btnEnviar.className = "option publish";
 
-                        btnExcluir.setAttribute("onclick", `deletar(${publicacao.idComentario}'`);
+                        btnExcluir.setAttribute("onclick", `deletar(${publicacao.idComentario})`);
                         // btnEditar.setAttribute("onclick", `openModal('${publicacao.assunto}', '${publicacao.descricao}', ${publicacao.idComentario})`);
                         btnEnviar.setAttribute("onclick", `editar(${publicacao.idComentario})`);
 
