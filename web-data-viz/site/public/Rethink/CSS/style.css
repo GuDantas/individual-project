@@ -57,6 +57,9 @@ h2, h3{
 .content{
     margin-left:7vw ;
 }
+.content a{
+    text-decoration: none;
+}
 .content img{
     height: 25vh;
 }

@@ -1,0 +1,44 @@
+.dataLabel{
+    border: 1px solid black;
+    display: flex;
+    margin: 1vh;
+    padding: 2vh;
+    border-radius: 5px;
+}
+.grafico{
+    display: block;
+}
+.graph{
+    display: block;
+}
+.homeContainer{
+    padding: 5vw;
+    margin: auto;
+    background-color: darkgray;
+    border-radius: 5px;
+}
+.veiculo input{
+    border-radius: 3px;
+    border: 0 none;
+}
+.option{
+margin-top:1vh ;
+margin-left: 3px;
+}
+h2{
+    color: black;
+}
+.Header{
+    margin-bottom: 5vh;
+}
+.footer{
+    margin-top: 5vh;
+}
+.avisos{
+    display: flex;
+}
+.warnings{
+width: 7vw;
+height: 3vh;
+border-radius: 5px;
+}
